@@ -3,8 +3,10 @@ import kaggle
 from zipfile import ZipFile
 import pandas as pd
 
-RAW_DATA_PATH = '../data/raw'
-INTERIM_DATA_PATH = '../data/interim'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+RAW_DATA_PATH = os.path.join(BASE_DIR, '../data/raw')
+INTERIM_DATA_PATH = os.path.join(BASE_DIR, '../data/interim')
 CONTEST_NAME = 'nlp-getting-started'
 ZIP_FILE_PATH = os.path.join(RAW_DATA_PATH, CONTEST_NAME + '.zip')
 FULL_TRAIN_DATA_PATH = os.path.join(RAW_DATA_PATH, 'train.csv')
