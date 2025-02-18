@@ -6,7 +6,7 @@ from torch.utils.data import Dataset, DataLoader, RandomSampler, SequentialSampl
 import os
 from transformers import BertTokenizer, BertForSequenceClassification, get_scheduler
 from tqdm.auto import tqdm
-from nlp_with_disaster_tweets.dataset import load_raw_test_df, load_raw_train_df, load_raw_val_df
+from disaster_prediction.dataset import load_raw_test_df, load_raw_train_df, load_raw_val_df
 from sklearn.metrics import f1_score, accuracy_score, recall_score, precision_score
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
