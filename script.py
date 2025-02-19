@@ -63,8 +63,8 @@ def train(model: Annotated[str, typer.Argument(help='Model to train. Options: la
 def predict(model: Annotated[str, typer.Argument(help='Model to predict with. Options: large, small')],
             data: Annotated[str, typer.Argument(
                 help='Path to the data to predict on. '
-                     'The data should be a CSV file with both text and keyword columns if using the large model, '
-                     'and a text column if using the small model. Other valid values are "train", "val", and "test".')],
+                     'The data should be a CSV file with id, text, and keyword (can be null) columns. '
+                     'Other valid values are "train", "val", and "test".')],
             output: Annotated[str, typer.Argument(help='Path to save the predictions')] = None,
             force_train: Annotated[bool, typer.Option('--force-train/--no-force-train', '-f/-F',
                                                       help='Force training the model before predicting')] = False,
@@ -72,14 +72,15 @@ def predict(model: Annotated[str, typer.Argument(help='Model to predict with. Op
     model_specs = model_specs_map[model]
     model_path = validate_model_path_or_get_default(model_specs, model_path)
     model_controller = ModelController(model_specs, model_path)
-    if force_train or not model_controller.is_trained():
+    if force_train or not model_controller.is_trained:
         train_df = load_raw_train_df()
         model_controller.train(train_df)
     data = get_df_from_data_path_or_desc(data)
     predictions = model_controller.predict(data)
     if output is None:
-        output = f'../predictions/{model_specs.model_name}.csv'
-    data['predictions'] = predictions
+        output = f'./data/predictions/{model_specs.model_name}.csv'
+    data['target'] = predictions
+    data = data[['id', 'target']]
     data.to_csv(output, index=False)
     typer.echo(f'Predictions saved to {output}')
 
