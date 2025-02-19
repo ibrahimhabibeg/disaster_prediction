@@ -1,12 +1,24 @@
-name: nlp-with-disaster-tweets
+name: disaster-prediction
 channels:
   - conda-forge
 dependencies:
-  - python=3.10
   - black
   - flake8
   - isort
   - pip
+  - python=3.10
+  - kaggle
+  - pandas
+  - scikit-learn
+  - transformers
+  - pytorch
+  - torchvision
+  - ipywidgets
+  - torchinfo
+  - evaluate
+  - prettytable
+  - plotly
+  - typer
   - pip:
     - python-dotenv
     - mkdocs
