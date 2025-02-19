@@ -2,7 +2,7 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_NAME = nlp-with-disaster-tweets
+PROJECT_NAME = disaster-prediction
 PYTHON_VERSION = 3.10
 PYTHON_INTERPRETER = python
 
@@ -17,29 +17,6 @@ requirements:
 	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
 	
 
-
-
-## Delete all compiled Python files
-.PHONY: clean
-clean:
-	find . -type f -name "*.py[co]" -delete
-	find . -type d -name "__pycache__" -delete
-
-## Lint using flake8 and black (use `make format` to do formatting)
-.PHONY: lint
-lint:
-	flake8 nlp_with_disaster_tweets
-	isort --check --diff --profile black nlp_with_disaster_tweets
-	black --check --config pyproject.toml nlp_with_disaster_tweets
-
-## Format source code with black
-.PHONY: format
-format:
-	black --config pyproject.toml nlp_with_disaster_tweets
-
-
-
-
 ## Set up python interpreter environment
 .PHONY: create_environment
 create_environment:
@@ -48,15 +25,7 @@ create_environment:
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
 	
 
-
-
-#################################################################################
-# PROJECT RULES                                                                 #
-#################################################################################
-
-
-
-#################################################################################
+##########################################################################
 # Self Documenting Commands                                                     #
 #################################################################################
 
