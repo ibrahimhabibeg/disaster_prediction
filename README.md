@@ -1,61 +1,118 @@
-# nlp-with-disaster-tweets
+# Disaster Prediction
+#### Predict which Tweets are about real disasters and which ones are not
 
-<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
-    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
-</a>
+## About the Project
 
-Predict which Tweets are about real disasters and which ones are not
+This project is for the Kaggle competition
+[Natural Language Processing with Disaster Tweets](https://www.kaggle.com/competitions/nlp-getting-started/data).
+The goal of this project is to build a machine learning model that 
+predicts which Tweets correspond to real disasters and which are not.
 
-## Project Organization
+This repo contains the notebooks used by the author to experiment
+with different models and techniques. The final output is in the
+disaster_prediction directory. It contains code that is used inside 
+the notebooks and contains the code to train the model and use it for
+inference. Moreover, there is a script that you can use to quickly
+train the model, evaluate it, and make predictions.
 
+## Getting Started
+
+### Prerequisites
+
+To run the code in this repo you have to install conda. You can
+download it from [here](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
+
+### Installation
+
+This repo contains a `Makefile` that you can use to quickly
+create the conda environment and install the required packages.
+
+To work locally you should follow these steps:
+
+1. Clone the repo
+```sh
+git clone https://github.com/ibrahimhabibeg/disaster_prediction.git
 ```
-├── LICENSE            <- Open-source license if one is chosen
-├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
-├── README.md          <- The top-level README for developers using this project.
-├── data
-│   ├── external       <- Data from third party sources.
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
-│
-├── docs               <- A default mkdocs project; see www.mkdocs.org for details
-│
-├── models             <- Trained and serialized models, model predictions, or model summaries
-│
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
-│
-├── pyproject.toml     <- Project configuration file with package metadata for 
-│                         nlp_with_disaster_tweets and configuration for tools like black
-│
-├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-│
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
-│
-├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-│                         generated with `pip freeze > requirements.txt`
-│
-├── setup.cfg          <- Configuration file for flake8
-│
-└── nlp_with_disaster_tweets   <- Source code for use in this project.
-    │
-    ├── __init__.py             <- Makes nlp_with_disaster_tweets a Python module
-    │
-    ├── config.py               <- Store useful variables and configuration
-    │
-    ├── dataset.py              <- Scripts to download or generate data
-    │
-    ├── features.py             <- Code to create features for modeling
-    │
-    ├── modeling                
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
-    │   └── train.py            <- Code to train models
-    │
-    └── plots.py                <- Code to create visualizations
+or if you are using GitHub CLI
+```sh
+gh repo clone ibrahimhabibeg/disaster_prediction
 ```
 
---------
+2. Change the directory to the repo
+```sh
+cd disaster_prediction
+```
 
+3. Create the conda environment
+```sh
+make create_environment
+```
+
+4. Activate the conda environment
+```sh
+conda activate disaster-prediction
+```
+
+## Project Structure
+
+The project is structured as follows:
+
+```
+disaster_prediction/
+│
+├── data/
+│   ├── raw/
+│   ├── interim/
+│   ├── predictions/
+│   └── submissions/
+│
+├── disaster_prediction/
+│   ├── dataset.py            # Downloads, splits, and loads the dataset
+│   ├── model_controller.py   # Trains, evaluates, and makes predictions
+│   ├── model_specs.py        # Defines a class that contains the model specs
+│   ├── utils.py              # Contains utility functions
+│   ├── models/              
+│   │   ├── __init__.py
+│   │   ├── small.py          # Contains the small model
+│   │   └── large.py          # Contains the large model
+│   └── __init__.py
+│
+├── notebooks/               # Contains the notebooks used for experimentation
+│
+├── script.py                # Script to train, evaluate, and make predictions
+│
+├── Makefile                 # Contains commands to create the conda environment
+│
+├── environment.yml          # Contains the conda environment
+│
+├── docs/                    # Contains documentation for the script.py
+│
+├── license
+│
+└── README.md
+```
+
+## Usage
+
+To train the model, evaluate it, and make predictions you can use the
+`script.py` script. The script documentation is in the `docs/script.md`
+file. To run the script you can use the following command:
+
+```sh
+python script.py --help
+```
+
+## About the Models
+
+Three are two models in the `models` directory. The `small.py` model
+and the `large.py` model.
+
+The `small.py` model is based on the bert-base model with a linear 
+layer on top of it. It is fine-tuned on the dataset. This model 
+ignores the `keyword` column.
+
+The `large.py` embeds the `text` column using the bert-large model
+and the `keyword` column using the bert-base model. The output of
+these two models is concatenated and passed through a simple
+classification head made of two linear layers with a ReLU activation
+function.
