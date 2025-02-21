@@ -52,6 +52,15 @@ make create_environment
 ```sh
 conda activate disaster-prediction
 ```
+## Usage
+
+To train the model, evaluate it, and make predictions you can use the
+`script.py` script. The script documentation is in the `docs/script.md`
+file. To run the script you can use the following command:
+
+```sh
+python script.py --help
+```
 
 ## Project Structure
 
@@ -90,16 +99,6 @@ disaster_prediction/
 ├── license
 │
 └── README.md
-```
-
-## Usage
-
-To train the model, evaluate it, and make predictions you can use the
-`script.py` script. The script documentation is in the `docs/script.md`
-file. To run the script you can use the following command:
-
-```sh
-python script.py --help
 ```
 
 ## About the Models
