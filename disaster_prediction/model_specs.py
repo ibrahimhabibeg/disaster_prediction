@@ -6,13 +6,13 @@ from torch import nn
 class ModelSpecs:
     def __init__(self,
                  model_name: str,
-                 model: nn.Module,
+                 model_creator: Callable[[], nn.Module],
                  dataset_creator: Callable[[pd.DataFrame, bool], torch.utils.data.Dataset],
                  learning_rate: float = 5e-5,
                  training_epochs: int = 4,
                  batch_size: int = 32):
         self.model_name = model_name
-        self.model = model
+        self.model_creator = model_creator
         self.dataset_creator = dataset_creator
         self.learning_rate = learning_rate
         self.training_epochs = training_epochs

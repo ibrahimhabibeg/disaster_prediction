@@ -39,7 +39,8 @@ class Model(nn.Module):
         else:
             return {'logits': logits}
 
-large_model = Model()
+def create_model():
+    return Model()
 
 def create_dataset(df: pd.DataFrame, include_labels=True) -> KeyedDataset:
     df['keyword'] = df['keyword'].fillna('')
@@ -70,7 +71,7 @@ def create_dataset(df: pd.DataFrame, include_labels=True) -> KeyedDataset:
 
 model_specs = ModelSpecs(
     model_name='large',
-    model=large_model,
+    model_creator=create_model,
     dataset_creator=create_dataset,
     learning_rate=5e-5,
     training_epochs=4,

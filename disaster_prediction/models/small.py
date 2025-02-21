@@ -25,7 +25,8 @@ class Model(nn.Module):
         else:
             return {'logits': logits}
 
-small_model = Model()
+def create_model():
+    return Model()
 
 def create_dataset(df: pd.DataFrame, include_labels=True) -> KeyedDataset:
     tokenizer = BertTokenizer.from_pretrained('google-bert/bert-base-uncased', do_lower_case=True)
@@ -44,7 +45,7 @@ def create_dataset(df: pd.DataFrame, include_labels=True) -> KeyedDataset:
 
 model_specs = ModelSpecs(
     model_name='small',
-    model=small_model,
+    model_creator=create_model,
     dataset_creator=create_dataset,
     learning_rate=5e-5,
     training_epochs=4,

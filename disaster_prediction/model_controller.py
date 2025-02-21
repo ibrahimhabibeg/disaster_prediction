@@ -30,19 +30,20 @@ class ModelController:
         self.weights_path = weights_path
         self.is_trained = os.path.exists(weights_path)
 
-    def __save_model(self) -> None:
-        torch.save(self.model_spec.model.state_dict(), self.weights_path)
+    def __save_model(self, model) -> None:
+        torch.save(model.state_dict(), self.weights_path)
         self.is_trained = True
 
     def __load_model(self) -> torch.nn.Module:
-        model = self.model_spec.model
+        model = self.model_spec.model_creator()
         model.load_state_dict(torch.load(self.weights_path, weights_only=True))
         return model
 
     def train(self, train_df: pd.DataFrame) -> None:
         train_dataloader = _prepare_data_loader(train_df, self.model_spec, shuffle=True, include_labels=True)
 
-        model = self.model_spec.model.to(self.device)
+        model = self.model_spec.model_creator()
+        model = model.to(self.device)
         optimizer = torch.optim.AdamW(model.parameters(), lr=self.model_spec.learning_rate)
         num_training_steps = len(train_dataloader) * self.model_spec.training_epochs
         lr_scheduler = get_scheduler('linear', optimizer, num_warmup_steps=0, num_training_steps=num_training_steps)
@@ -61,7 +62,7 @@ class ModelController:
                 progress.update()
                 progress.set_postfix({'loss': loss.item()})
 
-        self.__save_model()
+        self.__save_model(model)
 
     def predict(self, df: pd.DataFrame) -> list[int]:
         if not self.is_trained:
