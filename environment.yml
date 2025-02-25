@@ -1,25 +1,23 @@
 name: disaster-prediction
 channels:
-  - conda-forge
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
 dependencies:
   - black
+  - evaluate
   - flake8
+  - ipywidgets
   - isort
-  - pip
-  - python=3.10
   - kaggle
   - pandas
-  - scikit-learn
-  - transformers
-  - pytorch
-  - torchvision
-  - ipywidgets
-  - torchinfo
-  - evaluate
-  - prettytable
+  - pip
   - plotly
+  - prettytable
+  - python=3.10
+  - pytorch
+  - scikit-learn
+  - torchinfo
+  - torchvision
+  - transformers
   - typer
-  - pip:
-    - python-dotenv
-    - mkdocs
-    - -e .
+  - ipykernel
