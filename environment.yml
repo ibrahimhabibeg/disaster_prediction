@@ -1,7 +1,6 @@
 name: disaster-prediction
 channels:
-  - https://repo.anaconda.com/pkgs/main
-  - https://repo.anaconda.com/pkgs/r
+  - conda-forge
 dependencies:
   - black
   - evaluate
