@@ -26,8 +26,6 @@ download it from [here](https://docs.conda.io/projects/conda/en/latest/user-guid
 
 You should also download the kaggle.json file from your Kaggle account to be able to download the dataset. 
 
-```sh
-
 ### Installation
 
 This repo contains a `Makefile` that you can use to quickly
@@ -103,7 +101,7 @@ disaster_prediction/
 ├── docs/                                          # Contains documentation for the script.py
 │
 ├── license
-
+│
 ├── Using BERT to predict disaster Tweets.ipynb    # The competition notebook submitted to Kaggle
 │
 └── README.md
