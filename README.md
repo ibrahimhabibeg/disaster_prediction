@@ -15,12 +15,18 @@ the notebooks and contains the code to train the model and use it for
 inference. Moreover, there is a script that you can use to quickly
 train the model, evaluate it, and make predictions.
 
+The final notebook submitted to Kaggle is [here](https://www.kaggle.com/ibrahimhabibeg/using-bert-to-predict-disaster-tweets).
+
 ## Getting Started
 
 ### Prerequisites
 
 To run the code in this repo you have to install conda. You can
 download it from [here](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
+
+You should also download the kaggle.json file from your Kaggle account to be able to download the dataset. 
+
+```sh
 
 ### Installation
 
@@ -76,27 +82,29 @@ disaster_prediction/
 │   └── submissions/
 │
 ├── disaster_prediction/
-│   ├── dataset.py            # Downloads, splits, and loads the dataset
-│   ├── model_controller.py   # Trains, evaluates, and makes predictions
-│   ├── model_specs.py        # Defines a class that contains the model specs
-│   ├── utils.py              # Contains utility functions
+│   ├── dataset.py                                 # Downloads, splits, and loads the dataset
+│   ├── model_controller.py                        # Trains, evaluates, and makes predictions
+│   ├── model_specs.py                             # Defines a class that contains the model specs
+│   ├── utils.py                                   # Contains utility functions
 │   ├── models/              
 │   │   ├── __init__.py
-│   │   ├── small.py          # Contains the small model
-│   │   └── large.py          # Contains the large model
+│   │   ├── small.py                               # Contains the small model
+│   │   └── large.py                               # Contains the large model
 │   └── __init__.py
 │
-├── notebooks/               # Contains the notebooks used for experimentation
+├── notebooks/                                     # Contains the notebooks used for experimentation
 │
-├── script.py                # Script to train, evaluate, and make predictions
+├── script.py                                      # Script to train, evaluate, and make predictions
 │
-├── Makefile                 # Contains commands to create the conda environment
+├── Makefile                                       # Contains commands to create the conda environment
 │
-├── environment.yml          # Contains the conda environment
+├── environment.yml                                # Contains the conda environment
 │
-├── docs/                    # Contains documentation for the script.py
+├── docs/                                          # Contains documentation for the script.py
 │
 ├── license
+
+├── Using BERT to predict disaster Tweets.ipynb    # The competition notebook submitted to Kaggle
 │
 └── README.md
 ```
